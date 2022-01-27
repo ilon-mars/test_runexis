@@ -1,7 +1,13 @@
 <template>
-  <main></main>
+  <main class="main container">
+    <item-list></item-list>
+  </main>
 </template>
 
 <script>
-export default {}
+import ItemList from '~/components/ItemList'
+
+export default {
+  components: { ItemList }
+}
 </script>

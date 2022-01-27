@@ -14,6 +14,7 @@
   background-color: $main-color
   display: flex
   justify-content: flex-end
+  margin-bottom: 20px
 
   &__cart-link
     display: flex
