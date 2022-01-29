@@ -1,11 +1,11 @@
 <template>
-  <main class="main container">
+  <section>
     <item-list></item-list>
-  </main>
+  </section>
 </template>
 
 <script>
-import ItemList from '~/components/ItemList'
+import ItemList from '@/components/ItemList'
 
 export default {
   components: { ItemList }
