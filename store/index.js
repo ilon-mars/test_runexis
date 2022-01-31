@@ -3,7 +3,7 @@ import { ENDPOINTS } from '~/service/api'
 const state = () => ({
   items: [],
   categories: [],
-  cart: []
+  cart: [],
 })
 
 const mutations = {
@@ -17,7 +17,7 @@ const mutations = {
 
   ADD_TO_CART: (state, item) => {
     state.cart.push(item)
-  }
+  },
 }
 
 const actions = {
@@ -48,7 +48,14 @@ export const getters = {
   getItems: state => state.items,
   getCategories: state => state.categories,
   getItemsFromCart: state => state.cart,
-  getItemsInCartNumber: state => state.cart.length
+  getItemsInCartNumber: state => state.cart.length,
+  getTotalPrice: state => {
+    return state.cart.reduce((totalPrice, item) => {
+      totalPrice += item.cost
+
+      return totalPrice
+    }, 0)
+  },
 }
 
 export default {
