@@ -3,6 +3,7 @@ import { ENDPOINTS } from '~/service/api'
 const state = () => ({
   items: [],
   categories: [],
+  cart: []
 })
 
 const mutations = {
@@ -13,6 +14,10 @@ const mutations = {
   SET_CATEGORIES: (state, categories) => {
     state.categories = categories
   },
+
+  ADD_TO_CART: (state, item) => {
+    state.cart.push(item)
+  }
 }
 
 const actions = {
@@ -33,6 +38,7 @@ const actions = {
       acc.push(item)
       return acc
     }, [])
+
     commit('SET_CATEGORIES', values[1])
     commit('SET_ITEMS', itemsWithCategoryNames)
   },
@@ -41,6 +47,8 @@ const actions = {
 export const getters = {
   getItems: state => state.items,
   getCategories: state => state.categories,
+  getItemsFromCart: state => state.cart,
+  getItemsInCartNumber: state => state.cart.length
 }
 
 export default {

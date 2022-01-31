@@ -1,12 +1,34 @@
 <template>
   <header class="header">
-    <nuxt-link class="header__cart-link" to="/cart" data-counter="10">
+    <nuxt-link
+      class="header__cart-link"
+      to="/cart"
+      :data-counter="itemsInCart"
+      :style="isCounterVisible"
+    >
       <svg class="header__cart-icon">
         <use xlink:href="~/assets/img/sprite.svg#cart"></use>
       </svg>
     </nuxt-link>
   </header>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      itemsInCart: 'getItemsInCartNumber'
+    }),
+    isCounterVisible() {
+      return this.itemsInCart
+        ? `--counter-visibility: flex`
+        : `--counter-visibility: none`
+    }
+  }
+}
+</script>
 
 <style lang="sass">
 .header
@@ -17,6 +39,8 @@
   margin-bottom: 20px
 
   &__cart-link
+    --counter-visibility: flex
+
     display: flex
     width: 40px
     height: 40px
@@ -32,7 +56,7 @@
       right: 0
       background-color: $warning-color
       font-size: 12px
-      display: flex
+      display: var(--counter-visibility)
       align-items: center
       justify-content: center
       color: $light-color

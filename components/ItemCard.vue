@@ -14,6 +14,14 @@
             #{{ category.title }}
           </li>
         </ul>
+
+        <button
+          type="button"
+          class="item__add-to-cart"
+          @click.prevent="addToCart(item)"
+        >
+          Add to cart
+        </button>
       </div>
 
       <span class="item__price">{{ item.cost }}</span>
@@ -27,6 +35,12 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    addToCart(item) {
+      this.$store.commit('ADD_TO_CART', item)
     }
   }
 }
@@ -61,7 +75,7 @@ export default {
     margin-bottom: 10px
 
   &__description
-    margin-bottom: 10px
+    margin-bottom: 15px
     font-size: 16px
     line-height: 1.3
 
@@ -79,9 +93,10 @@ export default {
   &__category-list
     display: flex
     font-size: 16px
-    justify-self: flex-end
+    margin-bottom: 15px
+    margin-top: auto
 
-  &__category 
+  &__category
     padding: 5px 0
     border-radius: 20px
     color: $main-color
@@ -89,4 +104,11 @@ export default {
     &:not(:last-of-type)
       margin-right: 10px
 
+  &__add-to-cart
+    padding: 10px 15px
+    border-radius: 15px
+    background-color: $success-color
+    color: $light-color
+    margin-top: auto
+    align-self: center
 </style>
