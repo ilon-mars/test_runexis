@@ -1,6 +1,6 @@
 <template>
   <ul class="items">
-    <ItemCard v-for="item in items" :key="item.id" :item="item" />
+    <ItemCard v-for="item in filteredItems" :key="item.id" :item="item" />
   </ul>
 </template>
 
@@ -11,10 +11,33 @@ import ItemCard from '~/components/ItemCard'
 export default {
   components: { ItemCard },
 
+  data() {
+    return {
+      filteredItems: []
+    }
+  },
+
   computed: {
     ...mapGetters({
       items: 'getItems'
     })
+  },
+
+  mounted() {
+    this.filteredItems = this.items
+    this.$nuxt.$on('selectCategory', this.filterItems)
+  },
+
+  methods: {
+    filterItems(categoryId) {
+      if (categoryId === 0) {
+        this.filteredItems = this.items
+      } else {
+        this.filteredItems = this.items.filter(item =>
+          item.categories.includes(categoryId)
+        )
+      }
+    }
   }
 }
 </script>

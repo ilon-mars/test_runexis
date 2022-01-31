@@ -1,5 +1,6 @@
 <template>
   <section v-if="items.length">
+    <CategoryList />
     <ItemList />
   </section>
 
@@ -10,9 +11,10 @@
 import { mapGetters } from 'vuex'
 import ItemList from '@/components/ItemList'
 import Loader from '@/components/Loader'
+import CategoryList from '@/components/CategoryList'
 
 export default {
-  components: { Loader, ItemList },
+  components: { Loader, ItemList, CategoryList },
 
   computed: {
     ...mapGetters({
