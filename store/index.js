@@ -46,6 +46,7 @@ const actions = {
 
 export const getters = {
   getItems: state => state.items,
+  getItemById: state => id => state.items.find(item => item.id === id),
   getCategories: state => state.categories,
   getItemsFromCart: state => state.cart,
   getItemsInCartNumber: state => state.cart.length,
