@@ -1,6 +1,6 @@
 <template>
   <section class="item-page">
-    <h2 class="item-page__header">{{ item.name }}</h2>
+    <h2 class="item-page__header title">{{ item.name }}</h2>
 
     <p class="item-page__description">{{ item.descr }}</p>
 
@@ -53,11 +53,6 @@ export default {
 
 <style lang="sass">
 .item-page
-  &__header
-    font-size: 24px
-    font-weight: 600
-    margin-bottom: 20px
-
   &__description
     margin-bottom: 15px
 

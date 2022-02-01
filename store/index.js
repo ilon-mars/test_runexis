@@ -18,6 +18,10 @@ const mutations = {
   ADD_TO_CART: (state, item) => {
     state.cart.push(item)
   },
+
+  REMOVE_FROM_CART: (state, itemsLeft) => {
+    state.cart = itemsLeft
+  },
 }
 
 const actions = {
@@ -41,6 +45,13 @@ const actions = {
 
     commit('SET_CATEGORIES', values[1])
     commit('SET_ITEMS', itemsWithCategoryNames)
+  },
+
+  removeFromCart({ commit, state }, itemId) {
+    commit(
+      'REMOVE_FROM_CART',
+      state.cart.filter(item => item.id !== itemId)
+    )
   },
 }
 
