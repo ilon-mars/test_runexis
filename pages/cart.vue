@@ -26,7 +26,7 @@
 
     <span class="cart-page__total">Total: {{ totalPrice }}</span>
 
-    <CartForm />
+    <CartForm :items-in-cart="order" />
   </section>
 </template>
 

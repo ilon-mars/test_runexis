@@ -1,5 +1,5 @@
 <template>
-  <ValidationObserver v-slot="{ invalid }" tag="div">
+  <ValidationObserver v-slot="{ invalid }" tag="div" @submit.prevent="onSubmit">
     <form class="cart-page__form">
       <fieldset class="cart-page__form-group">
         <legend class="cart-page__form-title title">Contact information</legend>
@@ -10,7 +10,7 @@
             class="cart-page__form-input"
             placeholder="Name"
             name="name"
-            :class="{ error: invalid }"
+            :class="{ error: errors[0] }"
           />
           <span>{{ errors[0] }}</span>
         </ValidationProvider>
@@ -22,7 +22,7 @@
             class="cart-page__form-input"
             placeholder="Email"
             name="email"
-            :class="{ error: invalid }"
+            :class="{ error: errors[0] }"
           />
           <span>{{ errors[0] }}</span>
         </ValidationProvider>
@@ -41,14 +41,18 @@
             class="cart-page__form-input"
             placeholder="+7(123)456-78-90"
             name="phone"
-            :class="{ error: invalid }"
+            :class="{ error: errors[0] }"
           />
           <span>{{ errors[0] }}</span>
         </ValidationProvider>
       </fieldset>
 
       <div class="cart-page__form-buttons">
-        <button class="btn cart-page__submit" type="submit" :disabled="invalid">
+        <button
+          class="btn cart-page__submit"
+          type="submit"
+          :disabled="invalid || !totalPrice"
+        >
           Submit
         </button>
 
@@ -68,12 +72,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { ENDPOINTS } from '~/service/api'
 
 export default {
   components: {
     ValidationObserver,
     ValidationProvider
+  },
+
+  props: {
+    itemsInCart: {
+      type: Array,
+      default: () => []
+    }
   },
 
   data() {
@@ -84,9 +97,38 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      totalPrice: 'getTotalPrice',
+      cart: 'getItemsFromCart'
+    })
+  },
+
   methods: {
     resetCart() {
       this.$store.commit('RESET_CART')
+    },
+
+    onSubmit(e) {
+      const order = this.itemsInCart.map(item => ({
+        name: item.name,
+        amount: item.amount,
+        total: item.amount * item.cost
+      }))
+
+      this.$axios
+        .post(ENDPOINTS.postData, {
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          order,
+          totalPrice: this.totalPrice
+        })
+        .then(() => {
+          e.target.reset()
+          this.resetCart()
+          this.name = this.email = this.phone = ''
+        })
     }
   }
 }
