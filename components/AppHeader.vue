@@ -14,9 +14,11 @@
       :data-counter="itemsInCart"
       :style="isCounterVisible"
     >
-      <svg class="header__cart-icon">
-        <use xlink:href="~/assets/img/sprite.svg#cart"></use>
-      </svg>
+      <img
+        src="~/assets/img/cart-icon.png"
+        alt="logo"
+        class="header__cart-icon"
+      />
     </nuxt-link>
 
     <span class="header__cart-price">{{
@@ -87,7 +89,7 @@ export default {
   &__cart-icon
     width: 100%
     height: 100%
-    fill: $light-color
+    object-fit: contain
 
   &__cart-price
     display: flex

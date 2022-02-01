@@ -1,5 +1,5 @@
 <template>
-  <section class="filter">
+  <div class="filter">
     <h2 class="filter__title">Filter by category:</h2>
     <ul class="filter__category-list">
       <li
@@ -23,7 +23,7 @@
         {{ category.title }}
       </option>
     </select>
-  </section>
+  </div>
 </template>
 
 <script>

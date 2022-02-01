@@ -1,5 +1,5 @@
 <template>
-  <ValidationObserver v-slot="{ invalid }">
+  <ValidationObserver v-slot="{ invalid }" tag="div">
     <form class="cart-page__form">
       <fieldset class="cart-page__form-group">
         <legend class="cart-page__form-title title">Contact information</legend>
