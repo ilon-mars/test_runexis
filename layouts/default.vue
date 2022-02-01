@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <AppHeader />
 
     <main class="container">
       <Nuxt />
@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
+import AppHeader from '@/components/AppHeader'
 
 export default {
-  components: { Header }
+  components: { AppHeader }
 }
 </script>
