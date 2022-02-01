@@ -1,5 +1,13 @@
 <template>
   <header class="header">
+    <nuxt-link class="header__logo" to="/">
+      <img
+        src="~/assets/img/store-icon.png"
+        alt="logo"
+        class="header__logo-icon"
+      />
+    </nuxt-link>
+
     <nuxt-link
       class="header__cart-link"
       to="/cart"
@@ -11,7 +19,9 @@
       </svg>
     </nuxt-link>
 
-    <span class="header__cart-price">{{itemsInCart ? totalPrice : 'Cart is empty'}}</span>
+    <span class="header__cart-price">{{
+      itemsInCart ? totalPrice : 'Cart is empty'
+    }}</span>
   </header>
 </template>
 
@@ -40,6 +50,16 @@ export default {
   display: flex
   justify-content: flex-end
   margin-bottom: 20px
+
+  &__logo
+    width: 40px
+    height: 40px
+    margin-right: auto
+
+    &-icon
+      width: 100%
+      height: 100%
+      object-fit: contain
 
   &__cart-link
     --counter-visibility: flex
