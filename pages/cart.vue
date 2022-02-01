@@ -26,29 +26,18 @@
 
     <span class="cart-page__total">Total: {{ totalPrice }}</span>
 
-    <form class="cart-page__form">
-      <fieldset class="cart-page__form-group">
-        <legend class="cart-page__form-title title">Contact information</legend>
-        <input type="text" class="cart-page__form-input" placeholder="Name">
-        <input type="text" class="cart-page__form-input" placeholder="Email">
-        <input type="text" class="cart-page__form-input" placeholder="Phone">
-      </fieldset>
-
-      <div class="cart-page__form-buttons">
-        <button class="btn cart-page__form-reset" type="reset">Reset form</button>
-        <button class="btn cart-page__cart-reset" type="button" @click="resetCart">Reset cart</button>
-      </div>
-    </form>
+    <CartForm />
   </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import RemoveFromCartBtn from '@/components/UI/RemoveFromCart'
+import CartForm from '@/components/CartForm'
 import removeFromCart from '@/mixins/removeFromCart'
 
 export default {
-  components: { RemoveFromCartBtn },
+  components: { RemoveFromCartBtn, CartForm },
 
   mixins: [removeFromCart],
 
@@ -77,9 +66,6 @@ export default {
   methods: {
     countPrice(amount, cost) {
       return amount * cost
-    },
-    resetCart() {
-      this.$store.commit('RESET_CART')
     }
   }
 }
@@ -185,39 +171,4 @@ export default {
           grid-area: btn
           display: flex
           justify-content: center
-  
-  &__form
-    display: flex
-    flex-direction: column
-    align-items: center
-
-    &-group
-      display: flex
-      flex-direction: column
-      margin-bottom: 15px
-
-    &-input
-      width: 300px
-      margin: 0 auto 15px
-      min-height: 30px
-      padding: 10px
-      border: 1px solid $main-color
-      border-radius: 10px
-      font-family: inherit
-      font-size: 16px
-
-      @media screen and ( max-width: 400px )
-        width: 250px
-
-    &-reset
-      border: 2px solid $main-color
-      margin-right: 15px
-
-    &-buttons
-      display: flex
-      justify-content: center
-
-  &__cart-reset
-      border: 2px solid $warning-color
-      margin-right: 15px
 </style>
