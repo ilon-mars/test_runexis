@@ -18,7 +18,7 @@
           <td>{{ item.amount }}</td>
           <td>{{ countPrice(item.amount, item.cost) }}</td>
           <td>
-            <RemoveFromCart @removeFromCart="removeItem(item.id)" />
+            <RemoveFromCartBtn @removeFromCart="removeFromCart(item.id)" />
           </td>
         </tr>
       </tbody>
@@ -30,10 +30,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import RemoveFromCart from '@/components/UI/RemoveFromCart.vue'
+import RemoveFromCartBtn from '@/components/UI/RemoveFromCart'
+import removeFromCart from '@/mixins/removeFromCart'
 
 export default {
-  components: { RemoveFromCart },
+  components: { RemoveFromCartBtn },
+
+  mixins: [removeFromCart],
 
   computed: {
     ...mapGetters({
@@ -60,9 +63,6 @@ export default {
   methods: {
     countPrice(amount, cost) {
       return amount * cost
-    },
-    removeItem(id) {
-      this.$store.dispatch('removeFromCart', id)
     }
   }
 }

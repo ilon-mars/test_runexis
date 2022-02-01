@@ -18,7 +18,9 @@
         <AddToCartBtn
           type="button"
           class="item__add-to-cart"
+          :item-id="item.id"
           @addToCart="addToCart(item)"
+          @removeFromCart="removeFromCart(item.id)"
         >
           Add to cart
         </AddToCartBtn>
@@ -31,20 +33,18 @@
 
 <script>
 import AddToCartBtn from '@/components/UI/AddToCartBtn.vue'
+import addToCart from '@/mixins/addToCart'
+import removeFromCart from '@/mixins/removeFromCart'
 
 export default {
   components: { AddToCartBtn },
+
+  mixins: [addToCart, removeFromCart],
 
   props: {
     item: {
       type: Object,
       required: true
-    }
-  },
-
-  methods: {
-    addToCart(item) {
-      this.$store.commit('ADD_TO_CART', item)
     }
   }
 }
