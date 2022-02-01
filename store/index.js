@@ -22,6 +22,10 @@ const mutations = {
   REMOVE_FROM_CART: (state, itemsLeft) => {
     state.cart = itemsLeft
   },
+
+  RESET_CART: state => {
+    state.cart = []
+  },
 }
 
 const actions = {

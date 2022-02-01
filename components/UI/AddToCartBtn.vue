@@ -4,7 +4,7 @@
   <button
     v-else
     type="button"
-    class="add-to-cart"
+    class="btn add-to-cart"
     @click.prevent="$emit('addToCart')"
   >
     Add to cart
@@ -37,8 +37,6 @@ export default {
 
 <style lang="sass">
 .add-to-cart
-  padding: 10px 15px
-  border-radius: 15px
   background-color: $success-color
   color: $light-color
   margin-top: auto
