@@ -15,13 +15,13 @@
           </li>
         </ul>
 
-        <button
+        <AddToCartBtn
           type="button"
           class="item__add-to-cart"
-          @click.prevent="addToCart(item)"
+          @addToCart="addToCart(item)"
         >
           Add to cart
-        </button>
+        </AddToCartBtn>
       </div>
 
       <span class="item__price">{{ item.cost }}</span>
@@ -30,7 +30,11 @@
 </template>
 
 <script>
+import AddToCartBtn from '@/components/UI/AddToCartBtn.vue'
+
 export default {
+  components: { AddToCartBtn },
+
   props: {
     item: {
       type: Object,
@@ -103,12 +107,4 @@ export default {
 
     &:not(:last-of-type)
       margin-right: 10px
-
-  &__add-to-cart
-    padding: 10px 15px
-    border-radius: 15px
-    background-color: $success-color
-    color: $light-color
-    margin-top: auto
-    align-self: center
 </style>
